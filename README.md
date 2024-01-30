@@ -1,5 +1,8 @@
 # Contexte du projet
-En tant que développeur en intelligence artificielle:
+En tant que développeur en intelligence artificielle :
+
+![image](https://github.com/PierreCav/ProjetNetfloox/assets/152514498/d413d922-cde8-4e3d-83f2-9451e87dee72)
+
 
 ​
 
