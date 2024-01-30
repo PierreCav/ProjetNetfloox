@@ -14,6 +14,7 @@ title_episode.tsv
 title_principals.tsv
 title_ratings.tsv
 title.crew.tsv
+title_basics.tsv
 
 # C extensions
 *.so
