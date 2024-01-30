@@ -1,5 +1,5 @@
 # Contexte du projet
-En tant que développeur en intelligence artificielle,
+En tant que développeur en intelligence artificielle:
 
 ​
 
