@@ -7,7 +7,6 @@ __pycache__/
 image.png
 README.md
 
-<<<<<<< HEAD
 # TSV to ignore
 name_basics.tsv
 title_akas.tsv
@@ -17,8 +16,7 @@ title_ratings.tsv
 title_crew.tsv
 title_basics.tsv
 
-=======
->>>>>>> aab9926 (gitignore and first commit)
+>>>>>>> c4e6edc (update gitignore)
 # C extensions
 *.so
 
