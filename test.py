@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-csv1 = r"D:\Code\ProjetN\ProjetNetfloox\tsv\name_basics.tsv"
+csv1 = r"ProjetNetfloox\tsv\name_basics.tsv"
 csv2 = r"ProjetNetfloox\tsv\title_akas.tsv"
 csv3 = r"ProjetNetfloox\tsv\title_basics.tsv"
 csv4 = r"ProjetNetfloox\tsv\title_crew.tsv"
