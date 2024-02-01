@@ -15,6 +15,7 @@ title_principals.tsv
 title_ratings.tsv
 title.crew.tsv
 title_basics.tsv
+ProjetNetfloox.sqlite
 BD/
 # C extensions
 *.so
