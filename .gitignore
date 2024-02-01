@@ -16,6 +16,9 @@ title_ratings.tsv
 title_crew.tsv
 title_basics.tsv
 
+#this one is for testing
+newfile.csv
+
 >>>>>>> c4e6edc (update gitignore)
 # C extensions
 *.so
