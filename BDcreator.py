@@ -9,6 +9,8 @@ BDD_URL = os.environ['BDD_URL'] # get environment variable
 print('BDD_URL=', BDD_URL)
 
 
+
+
 df_title_rating=pd.read_csv("BD/title_ratings.tsv", sep='\t',na_values='\\N')
 df_title_episode=pd.read_csv("BD/title_episode.tsv", sep='\t',na_values='\\N')
 df_title_crew=pd.read_csv("BD/title_crew.tsv", sep='\t',na_values='\\N')
