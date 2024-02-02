@@ -1,6 +1,14 @@
 #c'est pour creer la base de données avec toutes les tables completes
 import pandas as pd
 from sqlalchemy import create_engine
+import os
+from dotenv import load_dotenv
+
+load_dotenv('BDD_URL.env') # load environment variables from.env file
+BDD_URL = os.environ['BDD_URL'] # get environment variable
+print('BDD_URL=', BDD_URL)
+
+
 df_title_rating=pd.read_csv("BD/title_ratings.tsv", sep='\t',na_values='\\N')
 df_title_episode=pd.read_csv("BD/title_episode.tsv", sep='\t',na_values='\\N')
 df_title_crew=pd.read_csv("BD/title_crew.tsv", sep='\t',na_values='\\N')
@@ -11,7 +19,7 @@ df_title_akas.rename(columns={'titleId':'tconst'},inplace=True)
 df_title_principals=pd.read_csv("BD/title_principals.tsv", sep='\t',na_values='\\N')
 
 # Créez une connexion à la base de données
-engine = create_engine('postgresql://citus:floox2024!@c-groupe2.jh4mqc5jxykkfg.postgres.cosmos.azure.com:5432/netfloox?sslmode=require')
+engine = create_engine(BDD_URL)
 
 VarSchema=""
 
