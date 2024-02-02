@@ -8,16 +8,13 @@ image.png
 README.md
 
 # TSV to ignore
-name_basics.tsv
-title_akas.tsv
-title_episode.tsv
-title_principals.tsv
-title_ratings.tsv
-title_crew.tsv
-title_basics.tsv
+*.tsv
 
 #this one is for testing
 newfile.csv
+
+#fichiers avec mots de passe
+BDD_URL.env
 
 >>>>>>> c4e6edc (update gitignore)
 # C extensions
