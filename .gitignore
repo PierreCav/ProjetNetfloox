@@ -6,8 +6,9 @@ __pycache__/
 # Files readme etc..
 image.png
 README.md
-
+BDD_URL.env
 # TSV to ignore
+*.tsv
 name_basics.tsv
 title_akas.tsv
 title_episode.tsv
@@ -15,7 +16,7 @@ title_principals.tsv
 title_ratings.tsv
 title_crew.tsv
 title_basics.tsv
-BDD_URL.env
+
 # C extensions
 *.so
 
