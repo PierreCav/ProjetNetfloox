@@ -11,7 +11,9 @@ print('BDD_URL=', BDD_URL)
 engine = create_engine(BDD_URL)
 
 
-SQL= """SELECT * 
+SQL= """
+        -- SET search_path to test1;
+        SELECT * 
         FROM mohammed.title_ratings 
         ;"""
 

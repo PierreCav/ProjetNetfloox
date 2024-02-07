@@ -1,3 +1,6 @@
+
+
+
 DROP SCHEMA IF EXISTS test1 CASCADE;
 CREATE SCHEMA test1;
 SET search_path to test1;
@@ -82,7 +85,7 @@ CREATE TABLE title_ratings
   "numVotes" text
 );
 
-\COPY name_basics FROM PROGRAM 'curl -s https://datasets.imdbws.com/name.basics.tsv.gz | zcat | head -50000' with (format csv, delimiter E'\t', header TRUE, quote E'\b');
+\COPY name_basics FROM PROGRAM 'curl -s https://datasets.imdbws.com/name.basics.tsv.gz | zcat | head -50000' with (format csv, delimiter E'\t', header TRUE, NULL '\N', quote E'\b');
 \COPY title_basics FROM PROGRAM 'curl -s https://datasets.imdbws.com/title.basics.tsv.gz | zcat | head -50000' with (format csv, delimiter E'\t', header TRUE, quote E'\b');
 \COPY title_principals FROM PROGRAM 'curl -s https://datasets.imdbws.com/title.principals.tsv.gz | zcat | head -50000' with (format csv, delimiter E'\t', header TRUE, quote E'\b');
 \COPY title_crew FROM PROGRAM 'curl -s https://datasets.imdbws.com/title.crew.tsv.gz | zcat | head -50000' with (format csv, delimiter E'\t', header TRUE, quote E'\b');
