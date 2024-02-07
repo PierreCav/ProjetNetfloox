@@ -1,0 +1,30 @@
+import pandas as pd
+from sqlalchemy import create_engine
+from dotenv import load_dotenv
+import os
+
+
+load_dotenv('BDD_URL.env')
+BDD_URL = os.environ['BDD_URL']
+engine = create_engine(BDD_URL)
+conn = engine.connect()
+
+taillepage = 1000
+vue = 'principal.testview'
+testliste = []
+
+nombre_ligne_test = conn.execute(f"SELECT COUNT(*) FROM {vue};").fetchone()[0]
+nombrepages = -(-nombre_ligne_test // taillepage)
+
+for page in range(nombrepages):
+    offset = taillepage * page
+    sql_query = f"SELECT * FROM {vue} LIMIT {taillepage} OFFSET {offset};"
+    df_page = pd.read_sql_query(sql_query, engine)
+    testliste.append(df_page)
+
+df = pd.concat(testliste, ignore_index=True)
+
+engine.dispose()
+print(df.head())
+
+df.to_csv('./testdf.csv', index=False)

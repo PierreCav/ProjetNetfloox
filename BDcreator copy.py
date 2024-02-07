@@ -14,7 +14,7 @@ def lirecsv(a):
     dff= pd.read_csv(f'BD/{a}.tsv', sep='\t', na_values='\\N', chunksize=chunktaille)
     for df in dff :
         print(a, df.shape)
-        df.to_sql(a, con=engine, schema=VarSchema, if_exists='append', index=False, method='multi')
+        df.to_sql(a, con=engine, schema=VarSchema, if_exists='append', index=False)
 
 tablenames = ['title_ratings', 'title_episode', 'title_crew', 'title_basics', 'name_basics', 'title_akas', 'title principals']
 
