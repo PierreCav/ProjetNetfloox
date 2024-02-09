@@ -10,6 +10,9 @@ README.md
 # TSV to ignore
 *.tsv
 
+# Ignore sql scripts for personnal usage only
+*.sql
+
 #this one is for testing
 newfile.csv
 
