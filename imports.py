@@ -20,7 +20,7 @@ from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, HistGradientBoostingClassifier
 from sklearn.naive_bayes import ComplementNB, GaussianNB, MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
 
 # Machine learning - Model selection
 from sklearn.model_selection import train_test_split, GridSearchCV
