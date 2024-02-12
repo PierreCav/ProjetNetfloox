@@ -11,7 +11,7 @@ README.md
 *.tsv
 
 # Ignore sql scripts for personnal usage only
-*.sql
+ViewCreation.sql
 
 #this one is for testing
 newfile.csv
