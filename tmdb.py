@@ -2,7 +2,7 @@ import os
 import requests
 
 # Dossier de destination pour enregistrer les jaquettes
-destination_folder = "jaquettes"
+destination_folder = "jaquette"
 
 # Fonction pour récupérer l'URL de la jaquette d'un film à partir de TMDb
 def get_movie_poster_url(tmdb_id):
@@ -36,7 +36,7 @@ def save_movie_poster_locally(tmdb_id, destination_folder):
     return None
 
 # Exemple d'utilisation
-tmdb_id = 'tt0069189'
+tmdb_id = 'tt0062969'
 jaquette_path = save_movie_poster_locally(tmdb_id, destination_folder)
 if jaquette_path:
     print('Jaquette enregistrée localement:', jaquette_path)

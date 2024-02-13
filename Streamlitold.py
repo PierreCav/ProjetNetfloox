@@ -1,43 +1,59 @@
-import streamlit as st
-import os
+from stimports import *
 
-image = "ressources\\titre.png"
+# Session state valeur pour catégories
+if 'selected_category' not in st.session_state:
+    st.session_state['selected_category'] = None
 
-# Titre
+
+# Initialisation de la BDD
+engine = create_database_engine('BDD_URL.env')
+
+# Ecran titre avec logo
+image = "ressources/title.png"
 st.image(image, caption=None, width=None, use_column_width=True, clamp=False, channels="RGB", output_format="auto")
 st.markdown("<h2 style='text-align: center;'>On regarde quoi ce soir ?</h2>", unsafe_allow_html=True)
 st.write("")
 
 # Sidebar
-st.sidebar.title("Sidebar")
+st.sidebar.title("Catégorie")
+# Ajouter une catégorie ici pour créer un nouveau bouton
+categories = ["Films", "Série", "18+"]
+for category in categories:
+    if st.sidebar.button(category):
+        st.session_state['selected_category'] = category
+        st.write(f"<p style='text-align:center;'> Vous êtes dans la catégorie '{category}'</p>", unsafe_allow_html=True)
 
- # ajouter un truc a la liste pour ajouter un bouton
-options = ["Films", "Série", "18+"]
+sqklskdj = 'SET search_path to principal; SELECT * from "filmview" where "runtimeMinutes" Is NOT null and "titleType" = "movie" limit 10000;'
 
-for option in options:
-    if st.sidebar.button(option):
-        st.write(f"<p style='text-align:center;'> Vous êtes dans la catégorie '{option}'</p>", unsafe_allow_html=True)
 
+if st.sidebar.button("Engine Dispose") :
+    engine.dispose()
+
+# Barre de recherche
 search_query = st.text_input('Rechercher :')
+if st.button("Rechercher"):
+    if st.session_state['selected_category'] is None:
+        st.error("Veuillez sélectionner une catégorie avant de lancer la recherche.")
+    else:
+        # Exemple de requête SQL
+        st.write(SQL_director_crewnames)
+        st.session_state['selected_category'] = None
 
 st.markdown("---")
 st.write("")
 
 
-image_folder = "jaquettes"
+image_folder = "jaquette"
 
 image_files = os.listdir(image_folder)
 
 
-num_columns = 3
+num_columns = 4
 
-# Afficher les images en utilisant une grille
 for i in range(0, len(image_files), num_columns):
-    # Créer une nouvelle rangée dans la grille
-    col1, col2, col3 = st.columns(num_columns)
+    cols = st.columns(num_columns)
     for j in range(num_columns):
         index = i + j
         if index < len(image_files):
-            # Afficher l'image correspondante dans la colonne
-            with col1, col2:
-                st.image(os.path.join(image_folder, image_files[index]), use_column_width=False, caption=image_files[index])
+            with cols[j]:
+                st.image(os.path.join(image_folder, image_files[index]), use_column_width=True)
