@@ -1,10 +1,5 @@
 from stimports import *
 
-# Session state valeur pour catégories
-if 'selected_category' not in st.session_state:
-    st.session_state['selected_category'] = None
-
-
 # Initialisation de la BDD
 engine = create_database_engine('BDD_URL.env')
 
@@ -15,19 +10,51 @@ st.markdown("<h2 style='text-align: center;'>On regarde quoi ce soir ?</h2>", un
 st.write("")
 
 # Sidebar
+if 'selected_category' not in st.session_state:
+    st.session_state['selected_category'] = None
+
 st.sidebar.title("Catégorie")
+
 # Ajouter une catégorie ici pour créer un nouveau bouton
-categories = ["Films", "Série", "18+"]
+categories = ["Films", "Série"]
 for category in categories:
     if st.sidebar.button(category):
         st.session_state['selected_category'] = category
         st.write(f"<p style='text-align:center;'> Vous êtes dans la catégorie '{category}'</p>", unsafe_allow_html=True)
 
+
+# Définir la valeur initiale de l'état de session
+if "explicit_content" not in st.session_state:
+    st.session_state["explicit_content"] = False
+
+checkboite = st.sidebar.checkbox("Contenu explicite", key="disabled")
+st.session_state["explicit_content"] = checkboite
+
+st.sidebar.write(
+    ''
+    ''
+    ''
+    )
+st.sidebar.write('')
+st.sidebar.write('')
+st.sidebar.write('')
+st.sidebar.write('')
+st.sidebar.write('')
+st.sidebar.write('')
+st.sidebar.write('')
+st.sidebar.write('')
+st.sidebar.write('')
+st.sidebar.write('')
+
+
+if st.sidebar.button("Relâcher connexion SQL") :
+    engine.dispose(st.session_state["explicit_content"])
+
+
+
 sqklskdj = 'SET search_path to principal; SELECT * from "filmview" where "runtimeMinutes" Is NOT null and "titleType" = "movie" limit 10000;'
 
 
-if st.sidebar.button("Engine Dispose") :
-    engine.dispose()
 
 # Barre de recherche
 search_query = st.text_input('Rechercher :')
@@ -48,7 +75,7 @@ image_folder = "jaquette"
 image_files = os.listdir(image_folder)
 
 
-num_columns = 4
+num_columns = 3
 
 for i in range(0, len(image_files), num_columns):
     cols = st.columns(num_columns)
