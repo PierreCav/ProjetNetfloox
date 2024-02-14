@@ -14,7 +14,7 @@ def get_movie_poster_url(tmdb_id):
     return None
 
 # Exemple d'utilisation
-tmdb_id = 'tt0039354'
+tmdb_id = 'tt9326956'
 poster_url = get_movie_poster_url(tmdb_id)
 if poster_url:
     print('URL de la jaquette:', poster_url)
