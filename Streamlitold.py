@@ -1,7 +1,17 @@
 from stimports import *
 
+# Initialisation des valeurs session
+
+if "explicit_content" not in st.session_state:
+    st.session_state["explicit_content"] = False
+
+if 'selected_category' not in st.session_state:
+    st.session_state['selected_category'] = None
+
+
 # Initialisation de la BDD
 engine = create_database_engine('BDD_URL.env')
+
 
 # Ecran titre avec logo
 image = "ressources/title.png"
@@ -10,9 +20,6 @@ st.markdown("<h2 style='text-align: center;'>On regarde quoi ce soir ?</h2>", un
 st.write("")
 
 # Sidebar
-if 'selected_category' not in st.session_state:
-    st.session_state['selected_category'] = None
-
 st.sidebar.title("Catégorie")
 
 # Ajouter une catégorie ici pour créer un nouveau bouton
@@ -20,21 +27,28 @@ categories = ["Films", "Série"]
 for category in categories:
     if st.sidebar.button(category):
         st.session_state['selected_category'] = category
-        st.write(f"<p style='text-align:center;'> Vous êtes dans la catégorie '{category}'</p>", unsafe_allow_html=True)
+        if category == "Films":
+                with open('sqlrequests/SQLfilms.sql', 'r') as file:
+                    SQL = file.read()
+                    df = pd.read_sql(SQL, engine)
+                st.write(df)
+        if category == "Série":
+                with open('sqlrequests/SQLserie.sql','r') as file:
+                    SQL = file.read()
+                    df = pd.read_sql(SQL, engine)
+                st.write(df)
 
-
-# Définir la valeur initiale de l'état de session
-if "explicit_content" not in st.session_state:
-    st.session_state["explicit_content"] = False
+if st.session_state['selected_category'] is not None:
+    st.write(f"<p style='text-align:center;'> Vous êtes dans la catégorie '{st.session_state['selected_category']}'</p>", unsafe_allow_html=True)
 
 checkboite = st.sidebar.checkbox("Contenu explicite", key="disabled")
 st.session_state["explicit_content"] = checkboite
+st.sidebar.write(st.session_state["explicit_content"])
 
-st.sidebar.write(
-    ''
-    ''
-    ''
-    )
+st.sidebar.write('')
+st.sidebar.write('')
+st.sidebar.write('')
+st.sidebar.write('')
 st.sidebar.write('')
 st.sidebar.write('')
 st.sidebar.write('')
@@ -48,12 +62,7 @@ st.sidebar.write('')
 
 
 if st.sidebar.button("Relâcher connexion SQL") :
-    engine.dispose(st.session_state["explicit_content"])
-
-
-
-sqklskdj = 'SET search_path to principal; SELECT * from "filmview" where "runtimeMinutes" Is NOT null and "titleType" = "movie" limit 10000;'
-
+    engine.dispose()
 
 
 # Barre de recherche
@@ -70,17 +79,17 @@ st.markdown("---")
 st.write("")
 
 
-image_folder = "jaquette"
-
-image_files = os.listdir(image_folder)
-
-
-num_columns = 3
-
-for i in range(0, len(image_files), num_columns):
-    cols = st.columns(num_columns)
-    for j in range(num_columns):
+tmdb_ids = df['tconst']
+for i in range(0, len(tmdb_ids), 4):
+    cols = st.columns(4)
+    for j in range(4):
         index = i + j
-        if index < len(image_files):
-            with cols[j]:
-                st.image(os.path.join(image_folder, image_files[index]), use_column_width=True)
+        if index < len(tmdb_ids):
+            tmdb_id = tmdb_ids[index]
+            poster_url = get_movie_poster_url(tmdb_id)
+            if poster_url:
+                with cols[j]:
+                    st.image(poster_url, use_column_width=True, caption=tmdb_id)
+            else:
+                with cols[j]:
+                    st.image('ressources/placeholder.jpg')
