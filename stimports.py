@@ -13,6 +13,10 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from st_clickable_images import clickable_images
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns ; sns.set()
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 # Fonction pour importer la BDD avec le fichier environnement
 def create_database_engine(env_file_path):
@@ -34,4 +38,15 @@ def get_movie_poster_url(tmdb_id):
         if 'poster_path' in data:
             poster_path = data['poster_path']
             return f'https://image.tmdb.org/t/p/w500/{poster_path}'
+    return None
+
+def get_movie_synopsis(tmdb_id):
+    api_key = '330f02856761de4af7dcfbad30b193ae'
+    base_url = 'https://api.themoviedb.org/3/movie/'
+    endpoint = f'{tmdb_id}?api_key={api_key}&language=fr-FR'  # Modifier la langue si nécessaire
+    response = requests.get(base_url + endpoint)
+    if response.status_code == 200:
+        data = response.json()
+        if 'overview' in data:
+            return data['overview']
     return None
