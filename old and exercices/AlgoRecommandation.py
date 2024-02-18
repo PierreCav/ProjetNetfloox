@@ -54,21 +54,13 @@ def listTostr (df):
     return df.apply(lambda x: ' '.join(map(str, x)))
 
 df['feature'] = df['primaryTitle'] + ' '
-
 df['feature'] += 'titleType_'+df['titleType'] + ' '
-
 df['feature'] += 'Rating_'+RatingToCategory(df['averageRating']).astype(str) + ' '
-
 df['feature'] += 'startYear_'+DateToCategory(df['startYear']).astype(str) + ' '
-
 df['feature'] += RuntimeToCategory (df['runtimeMinutes']).astype(str)+ ' '
-
 df['feature'] += 'genre_'+df['genres'].astype(str)+' '
-
 df['feature'] += 'ADULT_'+BooleanToText (df['isAdult']).astype(str)+' '
-
 df['feature'] += listTostr (df['Cate&names']).astype(str)+' '
-
 df['feature'][0]
 
 
