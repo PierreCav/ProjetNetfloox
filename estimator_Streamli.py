@@ -1,21 +1,49 @@
+    import streamlit as st
+import joblib
+#Chargement des données
+# Data
+import pandas as pd
+import numpy as np
+from dotenv import load_dotenv
+import os 
+import pandas as pd
+from sqlalchemy import create_engine
+from dotenv import load_dotenv
+import os
+import matplotlib.pyplot as plt
+import math
+# Graphics
+import seaborn as sns 
 
-from stimports import *
+from sklearn.experimental import enable_halving_search_cv # noqa
 
-st.set_page_config(
-    page_title="Netfloox - Estimateur",
-    page_icon="🍿"
-)
+from sklearn.model_selection import HalvingGridSearchCV
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.impute import SimpleImputer
+from sklearn.compose import ColumnTransformer
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder, RobustScaler
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
+from sklearn.svm import SVR
+from sklearn.metrics import mean_squared_error
+from sklearn.preprocessing import FunctionTransformer
+# from sklearn.metrics import root_mean_squared_error
 
-st.image('ressources\\title.png', use_column_width="auto")
+
+
+st.image('logo.png', use_column_width="auto")
 
 
 # Interface utilisateur pour saisir les informations du film
+
 def user_input_features():
     st.sidebar.header('Informations sur le film')
     primaryTitle = st.sidebar.text_input('Titre', value='6 Gunn')
     titleType = st.sidebar.selectbox('Type de titre', ('movie', 'short', 'tvMovie', 'video', 'tvShort', 'tvSpecial', 'videoGame', 'tvSeries', 'tvMiniSerie'))
     isAdult = st.sidebar.slider('Est pour adulte', 0, 1, 0)
-    startYear = st.sidebar.slider('Année de début', 1800, 2022, 2014)
+    startYear = st.sidebar.slider('Année de début', 1800, 2050, 2014)
     runtimeMinutes = st.sidebar.slider('Durée en minutes', 1, 500, 116)
     genres = st.sidebar.text_input('genres', value='Drama')
     directors = st.sidebar.text_input('Directeurs', value='Kiran_Gawade')
@@ -63,14 +91,19 @@ st.table(user_input)
 
 # Prédiction de la popularité avec les modèles
 st.header('Estimation de la popularité:')
+def booleantrans (x):
+    return x.astype(bool).values.reshape(-1, 1)
 
-@st.cache
+@st.cache_data
 def chargemodel():
     # Chargez le modèle à partir du fichier sauvegardé
-    return joblib.load('SVR_test.pkl')
+    # return joblib.load('SVR1.pkl')
+    import pickle
+    with open('model.pkl', 'rb') as f:
+        return pickle.load(f)
 
 model = chargemodel()
 
-# prediction = model.predict(user_input)#[0]
-# st.write(f"Estimation de la popularité: {prediction:.2f}")
+prediction = model.predict(user_input)#[0]
+st.write("Estimation de la popularité: ",prediction)
 

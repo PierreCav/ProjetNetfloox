@@ -17,6 +17,22 @@ import matplotlib.pyplot as plt
 import seaborn as sns ; sns.set()
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+import joblib
+import numpy as np
+import math
+from sklearn.experimental import enable_halving_search_cv
+from sklearn.model_selection import HalvingGridSearchCV
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.impute import SimpleImputer
+from sklearn.compose import ColumnTransformer
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder, RobustScaler
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
+from sklearn.svm import SVR
+from sklearn.metrics import mean_squared_error
+from sklearn.preprocessing import FunctionTransformer
 
 # Fonction pour importer la BDD avec le fichier environnement
 def create_database_engine(env_file_path):
