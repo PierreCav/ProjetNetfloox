@@ -1,8 +1,14 @@
+# Procédure d'éxecution :
+Pour lancer l'application : streamlit 1_Homepage.py
+Notebook estimateur de popularite : PopulariteEstimateur_final.ipynb
+Notebook recommandation : Recommandation.ipynb
+
+
+
+
+
 # Contexte du projet
 En tant que développeur en intelligence artificielle :
-
-![image](https://github.com/PierreCav/ProjetNetfloox/assets/152514498/d413d922-cde8-4e3d-83f2-9451e87dee72)
-
 
 ​
 
@@ -57,3 +63,6 @@ Soutenance par groupe :
 ### Critères de performance
 L'application web est fonctionnelle et elle répond aux attentes du projet.
 L'application web est fonctionnelle et elle répond aux attentes du projet.
+
+
+
