@@ -6,6 +6,7 @@ __pycache__/
 # Files readme etc..
 image.png
 README.md
+BDD_URL.env
 
 # TSV to ignore
 name_basics.tsv
