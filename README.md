@@ -1,8 +1,10 @@
 # Procédure d'éxecution :
-Pour lancer l'application : streamlit 1_Homepage.py
-Notebook estimateur de popularite : PopulariteEstimateur_final.ipynb
-Notebook recommandation : Recommandation.ipynb
 
+Pour lancer l'application : streamlit run 1_Homepage.py
+
+Notebook estimateur de popularite : PopulariteEstimateur_final.ipynb
+
+Notebook recommandation : Recommandation.ipynb
 
 
 
